@@ -1,0 +1,133 @@
+<template>
+  <form class="container">
+    <h1>Palettenpacker</h1>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Palette</h2>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <label>Länge</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="pal.length"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Breite</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="pal.width"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Höhe</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="pal.height"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Maximalhöhe</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="pal.top"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Verpackungseinheit (VE)</h2>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <label>Länge</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="box.length"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Breite</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="box.width"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Höhe</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="box.height"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <label>Inhalt</label>
+            <div class="input-group">
+              <input type="text" class="form-control" value.bind="box.items"
+                     change.delegate="update(10)" keydown.delegate="update(500)">
+              <span class="input-group-addon">Stück</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div if.bind="error" class="alert alert-danger">
+      ${error}
+    </div>
+
+    <div if.bind="results.length <= 0" class="alert alert-warning">
+      Es passt nichtmal eine Verpackungseinheit auf die Palette.
+    </div>
+
+    <div if.bind="!error" repeat.for="r of results">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="info">
+            <th colspan="2">Auf Seite ${r.length} cm × ${r.width} cm gestellt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-xs-2">VE Gesamt</td>
+            <td>${r.totalBoxes}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-2">VE pro Lage</td>
+            <td>${r.boxesLength} × ${r.boxesWidth} = ${r.boxesPerLayer}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-2">Anzahl Lagen</td>
+            <td>${r.numberOfLayers}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-2">Größe auf der Palette</td>
+            <td>${r.actualLength} cm × ${r.actualWidth} cm × ${r.actualHeight} cm</td>
+          </tr>
+          <tr>
+            <td class="col-xs-2">Ausnutzung</td>
+            <td>${r.usage}%</td>
+          </tr>
+          <tr>
+            <td class="col-xs-2">Inhalt Gesamt</td>
+            <td>${r.totalItems} Stück</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</template>
