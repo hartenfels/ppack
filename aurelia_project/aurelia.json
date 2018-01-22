@@ -112,6 +112,16 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "text",
+          "jquery",
+          "three",
+          "three-orbit-controls",
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": ["jquery"],
+            "exports": "$"
+          },
           {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",

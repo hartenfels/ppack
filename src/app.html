@@ -1,4 +1,6 @@
 <template>
+  <require from="./modal3d"></require>
+
   <form class="container">
     <h1>Palettenpacker</h1>
 
@@ -98,36 +100,43 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr class="info">
-            <th colspan="2">Auf Seite ${r.length} cm × ${r.width} cm gestellt</th>
+            <th colspan="2">
+              Auf Seite ${r.length} cm × ${r.width} cm gestellt
+              <a href="#" class="pull-right" click.delegate="show3d(r)">
+                3D-Ansicht
+              </a>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="col-xs-2">VE Gesamt</td>
+            <td class="col-xs-3">VE Gesamt</td>
             <td>${r.totalBoxes}</td>
           </tr>
           <tr>
-            <td class="col-xs-2">VE pro Lage</td>
+            <td class="col-xs-3">VE pro Lage</td>
             <td>${r.boxesLength} × ${r.boxesWidth} = ${r.boxesPerLayer}</td>
           </tr>
           <tr>
-            <td class="col-xs-2">Anzahl Lagen</td>
+            <td class="col-xs-3">Anzahl Lagen</td>
             <td>${r.numberOfLayers}</td>
           </tr>
           <tr>
-            <td class="col-xs-2">Größe auf der Palette</td>
+            <td class="col-xs-3">Größe auf der Palette</td>
             <td>${r.actualLength} cm × ${r.actualWidth} cm × ${r.actualHeight} cm</td>
           </tr>
           <tr>
-            <td class="col-xs-2">Ausnutzung</td>
+            <td class="col-xs-3">Ausnutzung</td>
             <td>${r.usage}%</td>
           </tr>
           <tr>
-            <td class="col-xs-2">Inhalt Gesamt</td>
+            <td class="col-xs-3">Inhalt Gesamt</td>
             <td>${r.totalItems} Stück</td>
           </tr>
         </tbody>
       </table>
     </div>
   </form>
+
+  <modal3d data.bind="data3d"></modal3d>
 </template>

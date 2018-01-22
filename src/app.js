@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export class App {
   constructor() {
     this.pal = {
@@ -13,6 +15,8 @@ export class App {
       height : 20,
       items  : 1,
     };
+
+    this.data3d = {};
 
     this.calculate();
   }
@@ -122,6 +126,7 @@ export class App {
       actualWidth    : aw,
       actualHeight   : ah,
       usage          : this.calculateUsage(data, al * aw * ah),
+      pal            : data.pal,
     };
   }
 
@@ -129,5 +134,12 @@ export class App {
   calculateUsage(data, volume) {
     let max = data.pal.length * data.pal.width * (data.pal.top - data.pal.height);
     return (Math.round(volume / max * 10000) / 100).toFixed(2);
+  }
+
+
+  show3d(data) {
+    this.data3d = data;
+    $('#modal3d').modal('show');
+    return false;
   }
 }
